@@ -1,23 +1,24 @@
-import express, { Express, Request, Response } from "express";
-import dotenv from "dotenv";
-import { connectDatabase, db } from "../lib/db";
-import { PORT } from "../lib/config";
-import { hashPassword } from "../lib/hash";
 import bodyParser from "body-parser";
-import { ObjectId } from "mongodb";
+import dotenv from "dotenv";
+import express, { Express, Request, Response } from "express";
+import { PORT } from "./lib/config";
+import { connectDatabase, db } from "./lib/db";
 import {
   deleteUser,
   getAllUser,
   getUserByID,
   insertUser,
   updateUser,
-} from "../services/user";
+} from "./services/user";
 
 dotenv.config();
 
 const app: Express = express();
 app.use(bodyParser.json());
-const user = db.collection("users");
+
+app.get("/", (req: Request, res: Response) => {
+  res.json({ message: "Ping Success", time: new Date() });
+});
 
 app.post("/user", async (req: Request, res: Response) => {
   const data = req.body;
