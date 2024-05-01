@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 
-import { MONGODB_DATABASE, MONGODB_URL } from "../lib/config";
+import { MONGODB_DATABASE, MONGODB_URL } from "./config";
 
 const client = new MongoClient(MONGODB_URL);
 export const db = client.db(MONGODB_DATABASE);
