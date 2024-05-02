@@ -1,4 +1,4 @@
-import { Filter, ObjectId } from "mongodb";
+import { ObjectId } from "mongodb";
 import { hashPassword } from "../lib/hash";
 import { user } from "../models";
 
@@ -51,4 +51,20 @@ export async function deleteUser(id: string) {
     { $set: { deletedAt: new Date() } }
   );
   return update;
+}
+
+export async function changeUserPassword(id: string, password: string) {
+  const update = await user.updateOne(
+    { _id: new ObjectId(id) },
+    { $set: { password: await hashPassword(password) } }
+  );
+  return update;
+}
+
+export async function getUserByUsername(username: string) {
+  const data = await user.findOne({
+    username: username,
+    ...filterIsNotDeleted,
+  });
+  return data;
 }
