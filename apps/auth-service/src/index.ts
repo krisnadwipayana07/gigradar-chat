@@ -15,17 +15,20 @@ app.use(bodyParser.json());
 app.post("/auth", async (req: Request, res: Response) => {
   const data = req.body;
   const user = await getUserByUsername(data.username);
-  if (user == null)
+  if (user == null) {
+    console.error("[service] User not found");
     return res.status(404).json({ message: "Invalid Username or Password" });
+  }
 
   const match = await comparePassword(data.password, user.password);
-  if (!match)
+  if (!match) {
+    console.error("[service] Password Not Match", data.password, user.password);
     return res.status(404).json({ message: "Invalid Username or Password" });
+  }
 
   const token = generateToken(user._id.toString());
-
-  res.status(200).json({
-    message: "Auth created successfully",
+  return res.status(200).json({
+    message: "Login Success",
     data: {
       ...user,
       token,
