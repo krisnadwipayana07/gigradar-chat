@@ -11,7 +11,7 @@ import {
   updateUser,
 } from "./services/user";
 
-dotenv.config();
+dotenv.config({ path: "./env" });
 
 const app: Express = express();
 app.use(bodyParser.json());

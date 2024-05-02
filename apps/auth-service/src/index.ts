@@ -1,13 +1,13 @@
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import express, { Express, Request, Response } from "express";
-import { PORT, SECRET } from "./lib/config";
+import { PORT } from "./lib/config";
 import { connectDatabase } from "./lib/db";
 import { getUserByUsername } from "./services/user";
 import { comparePassword } from "./lib/hash";
 import { generateToken } from "./lib/token";
 
-dotenv.config();
+dotenv.config({ path: "./env" });
 
 const app: Express = express();
 app.use(bodyParser.json());
