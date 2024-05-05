@@ -1,81 +1,70 @@
-# Turborepo starter
+# Gigradar - Chat
 
-This is an official starter Turborepo.
+This is app is stateless with microservices (so can easly deploy seperate and intergrate with lamda)
 
-## Using this example
+- Message Service
+- Auth Service
+- User Service
+- Websocket
+- Web (frontend)
 
-Run the following command:
+For the Software Architecture like this
+![alt text](software-architecture.jpg)
 
-```sh
-npx create-turbo@latest
-```
+The user will be login first, then has a token that passing to websocket for connection to other microservices
 
-## What's inside?
+## Running The Program
 
-This Turborepo includes the following packages/apps:
+You can running the program using docker-compose or run directly using turborepo cause this is monolith web
 
-### Apps and Packages
+but before running the application, you need to make sure for the .env value in every apps, i already declare the .env.example so you can copy and remove .example the .env (if you forgot, i was already make config.ts for declare defalut value of .env)
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+Note: In my case, i using WSL for running this app, if you run the app using docker-compose maybe you need to find your WSL IP address so the services can interact with other services
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+for checking that, you can use `wsl hostname -I` in command prompt windows (this for Websocket tho, i need to using that IP)
+Reference : https://github.com/postmanlabs/postman-app-support/issues/11204
 
-### Utilities
+### Using Docker Compose
 
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
+For Running this program, you install docker-compose first then running this syntax:
 
 ```
-cd my-turborepo
-pnpm build
+docker-compose up
 ```
 
-### Develop
+### Using Turborepo
 
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
+For Running using turborepo, first you need to install all the package by using this syntax
 
 ```
-cd my-turborepo
-npx turbo login
+pnpm install
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+you can use npm, or yarn, but in my case i using pnpm cause fast to run
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+Then u can run all of the service and web by using this syntax
 
 ```
-npx turbo link
+pnpm run dev
 ```
 
-## Useful Links
+## Docker Repository
 
-Learn more about the power of Turborepo:
+Auth Service
+https://hub.docker.com/r/krisnadwipayana/gigradar-auth
 
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+Message Service
+https://hub.docker.com/r/krisnadwipayana/gigradar-message-service
+
+User Service
+https://hub.docker.com/r/krisnadwipayana/gigradar-user-service/tags
+
+Websocket
+https://hub.docker.com/r/krisnadwipayana/gigradar-websocket
+
+Web
+https://hub.docker.com/r/krisnadwipayana/gigradar-web/tags
+
+### Web Notes
+
+Need to refresh

@@ -10,7 +10,7 @@ export type NextCursor = {
   id: ObjectId;
 };
 export async function getAllMessage(cursor: NextCursor | null = null) {
-  const limit = 5 + 1;
+  const limit = 25 + 1;
   if (!cursor) {
     cursor = {
       createdAt: new Date("2024-01-01"),
