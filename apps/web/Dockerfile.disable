@@ -1,0 +1,12 @@
+FROM node:14
+
+WORKDIR /app
+
+COPY . .
+COPY .env /app
+RUN npm install
+RUN export NODE_OPTIONS=--openssl-legacy-provider
+
+EXPOSE 8001
+
+CMD ["npm", "start"]

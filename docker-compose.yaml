@@ -1,0 +1,78 @@
+version: "3"
+
+services:
+  auth-service:
+    container_name: auth-service
+    build: ./apps/auth-service
+    volumes:
+      - ./apps/auth-service:/app/auth-service
+    restart: always
+    ports:
+      - 3021:3021
+    networks:
+      - app_network
+
+  message-service:
+    container_name: message-service
+    build: ./apps/message-service
+    volumes:
+      - ./apps/message-service:/app/message-service
+    restart: always
+    ports:
+      - 3022:3022
+    networks:
+      - app_network
+
+  user-service:
+    container_name: user-service
+    build: ./apps/user-service
+    volumes:
+      - ./apps/user-service:/app/user-service
+    restart: always
+    ports:
+      - 3020:3020
+    networks:
+      - app_network
+
+  web:
+    container_name: web
+    build: ./apps/web
+    volumes:
+      - ./apps/web:/app/web
+    restart: always
+    ports:
+      - 8001:8001
+    networks:
+      - app_network
+
+  websocket:
+    container_name: websocket
+    build: ./apps/websocket
+    volumes:
+      - ./apps/websocket:/app/websocket
+    restart: always
+    ports:
+      - 3023:3023
+    networks:
+      - app_network
+
+  mongodb:
+    container_name: mongodb
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=
+      - MONGO_INITDB_ROOT_PASSWORD=
+      - MONGO_INITDB_DATABASE=chat
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - app_network
+
+networks:
+  app_network:
+
+volumes:
+  mongo_data:

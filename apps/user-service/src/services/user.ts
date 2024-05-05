@@ -2,8 +2,9 @@ import { ObjectId } from "mongodb";
 import { hashPassword } from "../lib/hash";
 import { user } from "../models";
 
-type User = {
+export type User = {
   username: string;
+  email: string;
   password: string;
 };
 
