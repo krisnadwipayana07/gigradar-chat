@@ -64,7 +64,3 @@ https://hub.docker.com/r/krisnadwipayana/gigradar-websocket
 
 Web
 https://hub.docker.com/r/krisnadwipayana/gigradar-web/tags
-
-### Web Notes
-
-Need to refresh
