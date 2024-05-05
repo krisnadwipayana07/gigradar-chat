@@ -64,3 +64,8 @@ https://hub.docker.com/r/krisnadwipayana/gigradar-websocket
 
 Web
 https://hub.docker.com/r/krisnadwipayana/gigradar-web/tags
+
+## Suggestion for the next
+
+better using kafka for message send from one service to other services
+Redis for storeing temporary data, can using for temporary state between same service (cause stateless services)
