@@ -69,3 +69,9 @@ https://hub.docker.com/r/krisnadwipayana/gigradar-web/tags
 
 better using kafka for message send from one service to other services
 Redis for storeing temporary data, can using for temporary state between same service (cause stateless services)
+
+## Task that not finish yet
+
+- Attach Image User sending message
+- User who active in the chat
+- Bug when first connect (but after refresh the page, message show)
