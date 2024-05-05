@@ -75,3 +75,16 @@ Redis for storeing temporary data, can using for temporary state between same se
 - Attach Image User sending message
 - User who active in the chat
 - Bug when first connect (but after refresh the page, message show)
+- Sorting Message by time and by email
+
+## Preview
+
+### Login
+![image](https://github.com/krisnadwipayana07/gigradar-chat/assets/72346645/b9bf6c01-428d-48df-8f47-95ef4d488001)
+
+### Register
+![image](https://github.com/krisnadwipayana07/gigradar-chat/assets/72346645/3db399c0-ad49-489a-b898-00f702b4c8b7)
+
+### Message Room
+![image](https://github.com/krisnadwipayana07/gigradar-chat/assets/72346645/b578cf63-51f8-4f6f-8044-f12a10275425)
+
