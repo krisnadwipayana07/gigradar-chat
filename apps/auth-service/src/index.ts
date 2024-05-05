@@ -5,12 +5,18 @@ import { PORT } from "./lib/config";
 import { connectDatabase } from "./lib/db";
 import { getUserByUsername } from "./services/user";
 import { comparePassword } from "./lib/hash";
-import { generateToken } from "./lib/token";
+import { generateToken, getTokenData, verifyToken } from "./lib/token";
+import cors from "cors";
 
 dotenv.config({ path: "./env" });
 
 const app: Express = express();
+app.use(cors());
 app.use(bodyParser.json());
+
+app.get("/", (req: Request, res: Response) => {
+  res.json({ message: "Ping Success", time: new Date() });
+});
 
 app.post("/auth", async (req: Request, res: Response) => {
   const data = req.body;
@@ -33,6 +39,28 @@ app.post("/auth", async (req: Request, res: Response) => {
       ...user,
       token,
     },
+  });
+});
+
+app.get("/check-token/:token", async (req: Request, res: Response) => {
+  console.info("[Request] Check Token", req.params.token);
+  const token = req.params.token;
+  if (!token) {
+    console.error("[Request] Token Not Found");
+    return res.status(404).json({ message: "Token Not Found" });
+  }
+
+  const verif = verifyToken(token);
+  if (!verif) {
+    console.error("[Service] Invalid Token");
+    return res.status(400).json({ message: "Invalid Token" });
+  }
+
+  const data = getTokenData(token);
+  console.info("[INFO] Token Verified", data);
+  res.json({
+    message: "Token Verified",
+    data,
   });
 });
 

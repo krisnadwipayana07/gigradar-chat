@@ -4,6 +4,7 @@ import express, { Express, Request, Response } from "express";
 import { PORT } from "./lib/config";
 import { connectDatabase, db } from "./lib/db";
 import {
+  User,
   changeUserPassword,
   deleteUser,
   getAllUser,
@@ -14,10 +15,12 @@ import {
 } from "./services/user";
 import { getTokenData } from "./lib/token";
 import { comparePassword } from "./lib/hash";
+import cors from "cors";
 
-dotenv.config({ path: "./env" });
+dotenv.parse("./env");
 
 const app: Express = express();
+app.use(cors());
 app.use(bodyParser.json());
 
 app.get("/", (req: Request, res: Response) => {
@@ -25,7 +28,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.post("/user", async (req: Request, res: Response) => {
-  const data = req.body;
+  const data: User = req.body;
 
   const user = await getUserByUsername(data.username);
   if (user) return res.status(400).json({ message: "Username already exists" });
